@@ -1,7 +1,6 @@
 const messageList = document.querySelector(".chat-box");
 const input = document.querySelector(".chat-input input");
 const sendButton = document.querySelector(".chat-input button");
-const sendSound = document.getElementById("sendSound");
 
 const responses = {
     hello: "Cześć!",
@@ -16,15 +15,12 @@ const responses = {
     default: "Nie jestem aż tak zaawansowany. Spróbuj zapytać o coś innego może..."
 };
 
-
 const forbiddenWords = ["motyla noga", "sigma", "kurczaki", "włanczać"];
-
 
 function containsForbiddenWord(text) {
     text = text.toLowerCase();
     return forbiddenWords.some(word => text.includes(word));
 }
-
 
 function getResponse(inputText) {
     inputText = inputText.toLowerCase();
@@ -35,14 +31,12 @@ function getResponse(inputText) {
     }
 }
 
-
 function sendMessage() {
     if (input.value !== "") {
         const userInputText = input.value.toLowerCase();
 
         if (containsForbiddenWord(userInputText)) {
             alert("Halo? Policja? Nie używaj takich słów.");
-
 
             const botWarning = document.createElement("div");
             botWarning.classList.add("chat-message", "bot-message");
@@ -59,11 +53,9 @@ function sendMessage() {
         message.innerHTML = `<div class="chat-message-text">${input.value}</div>`;
         messageList.appendChild(message);
 
-        sendSound.play();
         createSparkle(sendButton.offsetLeft + sendButton.offsetWidth / 2, sendButton.offsetTop);
 
         input.value = "";
-
 
         const typingMessage = document.createElement("div");
         typingMessage.classList.add("chat-message", "bot-message");
@@ -86,7 +78,6 @@ function sendMessage() {
     }
 }
 
-
 sendButton.addEventListener("click", sendMessage);
 
 //ENTER
@@ -95,7 +86,6 @@ input.addEventListener("keyup", (e) => {
         sendMessage();
     }
 });
-
 
 function createSparkle(x, y) {
     const sparkle = document.createElement('div');
@@ -108,7 +98,6 @@ function createSparkle(x, y) {
         sparkle.remove();
     }, 1000);
 }
-
 
 document.addEventListener('click', (e) => {
     createSparkle(e.clientX, e.clientY);
